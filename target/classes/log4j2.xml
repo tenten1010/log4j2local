@@ -1,0 +1,20 @@
+<configuration status="OFF">
+<appenders>
+    <NoSql name="elasticsearchAppender">
+        <Elasticsearch url="http://localhost:9200/_bulk" index="log4j2" type="log4j2"/>
+    </NoSql>
+    <Console name="Console" target="SYSTEM_OUT">
+        <PatternLayout pattern="[%d][%t][%p][%c:%L] %m%n" />
+    </Console>
+</appenders>
+<loggers>
+    <!--<logger name="test">-->
+        <!--<appender-ref ref="elasticsearchAppender"/>-->
+    <!--</logger>-->
+    <root level="all">
+        <appender-ref ref="Console"/>
+        <appender-ref ref="elasticsearchAppender"/>
+    </root>
+
+</loggers>
+</configuration>
