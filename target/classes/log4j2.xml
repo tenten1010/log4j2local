@@ -1,15 +1,23 @@
 <configuration status="OFF">
     <appenders>
-        <Socket name="Logstash" host="localhost" port="9601" protocol="TCP">
-            <PatternLayout pattern="%d|%t|%p|%c|%L|%m%n" />
+        <Socket name="Logstasha" host="localhost" port="9601" protocol="TCP">
+            <!--<PatternLayout pattern="%d|%t|%p|%c|%L|%m%n" />-->
+            <JsonLayout complete="false" compact="true">
+                <KeyValuePair key="id" value="$${ctx:id}"/>
+                <KeyValuePair key="appId" value="$${ctx:appId}"/>
+            </JsonLayout>
         </Socket>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d|%t|%p|%c|%L|%m%n" />
+            <!--<PatternLayout pattern="%d|%t|%p|%c|%L|%m%n" />-->
+            <JsonLayout>
+                <KeyValuePair key="id" value="$${ctx:id}"/>
+                <KeyValuePair key="appId" value="$${ctx:appId}"/>
+            </JsonLayout>
         </Console>
     </appenders>
     <loggers>
         <root level="all">
-            <AppenderRef ref="Logstash"/>
+            <AppenderRef ref="Logstasha"/>
             <appender-ref ref="Console"/>
         </root>
     </loggers>
